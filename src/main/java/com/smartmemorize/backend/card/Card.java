@@ -25,6 +25,46 @@ public class Card {
     @JoinColumn(name = "deck_id")
     private Deck deck;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFront() {
+        return front;
+    }
+
+    public void setFront(String front) {
+        this.front = front;
+    }
+
+    public String getBack() {
+        return back;
+    }
+
+    public void setBack(String back) {
+        this.back = back;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public List<ReviewInfo> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewInfo> reviews) {
+        this.reviews = reviews;
+    }
+
     @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewInfo> reviews = new ArrayList<>();
 
