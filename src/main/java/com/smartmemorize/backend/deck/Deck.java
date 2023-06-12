@@ -19,7 +19,7 @@ public class Deck {
     private String name;
 
     @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)
-    private UserDeck userDeck;
+    private List<UserDeck> userDecks;
 
     @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Card> cards = new ArrayList<>();
