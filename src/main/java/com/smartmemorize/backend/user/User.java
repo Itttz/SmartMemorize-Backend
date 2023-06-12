@@ -1,5 +1,6 @@
 package com.smartmemorize.backend.user;
 
+import com.smartmemorize.backend.deck.Deck;
 import com.smartmemorize.backend.deck.UserDeck;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -21,8 +22,11 @@ public class User {
     @NotBlank
     private String password;
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Deck> decks = new ArrayList<>();
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserDeck> decks = new ArrayList<>();
+    private List<UserDeck> userDecks = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -48,12 +52,20 @@ public class User {
         this.password = password;
     }
 
-    public List<UserDeck> getDecks() {
+    public List<Deck> getDecks() {
         return decks;
     }
 
-    public void setDecks(List<UserDeck> decks) {
+    public void setDecks(List<Deck> decks) {
         this.decks = decks;
+    }
+
+    public List<UserDeck> getUserDecks() {
+        return userDecks;
+    }
+
+    public void setUserDecks(List<UserDeck> userDecks) {
+        this.userDecks = userDecks;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.smartmemorize.backend.user;
 
-import com.smartmemorize.backend.security.UserDetailsImpl;
+import com.smartmemorize.backend.security.UserPrinciple;
 import com.smartmemorize.backend.user.dto.CreateUserDTO;
 import com.smartmemorize.backend.user.dto.UserResponseDTO;
 import com.smartmemorize.backend.user.exception.UserExistsException;
@@ -68,8 +68,8 @@ public class UserServiceImpl implements UserService {
                 new UsernamePasswordAuthenticationToken(createUserDTO.getUsername(), createUserDTO.getPassword())
         );
         setAuthenticationContext(authentication, request, response);
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        return modelMapper.map(userDetails, UserResponseDTO.class);
+        UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
+        return modelMapper.map(userPrinciple.getUser(), UserResponseDTO.class);
     }
 
     private void setAuthenticationContext(Authentication authentication,
