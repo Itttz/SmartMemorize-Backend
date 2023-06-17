@@ -60,7 +60,7 @@ public class DeckServiceImpl implements DeckService {
     User recipient = userRepository.findById(userId)
         .orElseThrow(() -> new UserNotFoundException(userId));
 
-    if (userDeckRepository.existsByUserAndDeck(recipient, deck)) {
+    if (userDeckRepository.existsByUserAndDeck(recipient, deck) || user.equals(recipient)) {
       throw new UserAlreadyInDeckException();
     }
 
