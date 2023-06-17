@@ -10,16 +10,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class DeckExceptionHandler {
-    private final Logger logger = LoggerFactory.getLogger(DeckExceptionHandler.class);
 
-    @ExceptionHandler(DeckNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ProblemDetail handleDeckNotFoundException(DeckNotFoundException e) {
-        logger.error(e.getMessage());
+  private final Logger logger = LoggerFactory.getLogger(DeckExceptionHandler.class);
 
-        ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
-        pd.setTitle("Deck not found");
+  @ExceptionHandler(DeckNotFoundException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ProblemDetail handleDeckNotFoundException(DeckNotFoundException e) {
+    logger.error(e.getMessage());
 
-        return pd;
-    }
+    ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+    pd.setTitle("Deck not found");
+
+    return pd;
+  }
 }

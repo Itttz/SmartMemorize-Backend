@@ -1,30 +1,31 @@
 package com.smartmemorize.backend.user.dto;
 
 public class UserResponseDTO {
-    private Long id;
-    private String username;
 
-    public Long getId() {
-        return id;
-    }
+  private Long id;
+  private String username;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    @Override
-    public String toString() {
-        return "UserResponseDTO{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                '}';
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  @Override
+  public String toString() {
+    return "UserResponseDTO{" +
+        "id=" + id +
+        ", username='" + username + '\'' +
+        '}';
+  }
 }

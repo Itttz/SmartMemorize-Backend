@@ -2,36 +2,61 @@ package com.smartmemorize.backend.deck;
 
 import com.smartmemorize.backend.deck.dto.CreateDeckDTO;
 import com.smartmemorize.backend.deck.dto.DeckResponseDTO;
+import com.smartmemorize.backend.deck.exception.DeckNotFoundException;
 import com.smartmemorize.backend.user.User;
+import com.smartmemorize.backend.user.UserRepository;
+import com.smartmemorize.backend.user.exception.UserNotFoundException;
+import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class DeckServiceImpl implements DeckService {
-    private final DeckRepository deckRepository;
-    private final ModelMapper modelMapper;
 
-    public DeckServiceImpl(DeckRepository deckRepository, ModelMapper modelMapper) {
-        this.deckRepository = deckRepository;
-        this.modelMapper = modelMapper;
-    }
+  private final DeckInvitationRepository deckInvitationRepository;
+  private final DeckRepository deckRepository;
+  private final UserRepository userRepository;
+  private final ModelMapper modelMapper;
 
-    @Override
-    public DeckResponseDTO createDeck(User user, CreateDeckDTO createDeckDTO) {
-        Deck deck = new Deck();
-        deck.setName(createDeckDTO.getName());
-        deck.setOwner(user);
+  public DeckServiceImpl(DeckInvitationRepository deckInvitationRepository,
+      DeckRepository deckRepository,
+      UserRepository userRepository,
+      ModelMapper modelMapper) {
+    this.deckInvitationRepository = deckInvitationRepository;
+    this.deckRepository = deckRepository;
+    this.userRepository = userRepository;
+    this.modelMapper = modelMapper;
+  }
 
-        return modelMapper.map(deckRepository.save(deck), DeckResponseDTO.class);
-    }
+  @Override
+  public DeckResponseDTO createDeck(User user, CreateDeckDTO createDeckDTO) {
+    Deck deck = new Deck();
+    deck.setName(createDeckDTO.getName());
+    deck.setOwner(user);
 
-    @Override
-    public List<DeckResponseDTO> getAllDecks(User user) {
-        return deckRepository.findAllByOwner(user)
-                .stream()
-                .map(deck -> modelMapper.map(deck, DeckResponseDTO.class))
-                .toList();
-    }
+    return modelMapper.map(deckRepository.save(deck), DeckResponseDTO.class);
+  }
+
+  @Override
+  public List<DeckResponseDTO> getAllDecks(User user) {
+    return deckRepository.findAllByOwner(user)
+        .stream()
+        .map(deck -> modelMapper.map(deck, DeckResponseDTO.class))
+        .toList();
+  }
+
+  @Override
+  public void inviteUserToDeck(User user, Long deckId, Long userId) {
+    Deck deck = deckRepository.findByIdAndOwner(deckId, user)
+        .orElseThrow(() -> new DeckNotFoundException(deckId));
+
+    User recipient = userRepository.findById(userId)
+        .orElseThrow(() -> new UserNotFoundException(userId));
+
+    DeckInvitation invitation = new DeckInvitation();
+    invitation.setDeck(deck);
+    invitation.setUser(recipient);
+
+    deckInvitationRepository.save(invitation);
+  }
 }

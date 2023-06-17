@@ -12,16 +12,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(UsernameNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ProblemDetail handleUsernameNotFoundException (UsernameNotFoundException e) {
-        logger.error(e.getMessage());
+  private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
-        problemDetail.setTitle("User not found");
+  @ExceptionHandler(UsernameNotFoundException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ProblemDetail handleUsernameNotFoundException(UsernameNotFoundException e) {
+    logger.error(e.getMessage());
 
-        return problemDetail;
-    }
+    ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND,
+        e.getMessage());
+    problemDetail.setTitle("User not found");
+
+    return problemDetail;
+  }
 }
