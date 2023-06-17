@@ -35,7 +35,7 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<UserDeck> userDecks = new ArrayList<>();
 
-  @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<DeckInvitation> deckInvitations = new ArrayList<>();
 
   public User() {

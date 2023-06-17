@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.CONFLICT)
 public class UserAlreadyInDeckException extends RuntimeException {
+
   public UserAlreadyInDeckException() {
     super("User is already in Deck");
   }

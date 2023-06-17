@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDeckRepository extends JpaRepository<Long, UserDeck> {
+
   boolean existsByUserAndDeck(User user, Deck deck);
 }

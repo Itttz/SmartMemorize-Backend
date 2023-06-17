@@ -33,7 +33,7 @@ public class UserDeck {
   private Deck deck;
 
   @OneToMany(mappedBy = "userDeck", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<ReviewInfo> reviews = new ArrayList<>();
+  private final List<ReviewInfo> reviews = new ArrayList<>();
 
   @Override
   public boolean equals(Object o) {
