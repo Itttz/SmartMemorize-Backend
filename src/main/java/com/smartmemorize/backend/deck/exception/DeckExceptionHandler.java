@@ -23,4 +23,15 @@ public class DeckExceptionHandler {
 
     return pd;
   }
+
+  @ExceptionHandler(UserAlreadyInDeckException.class)
+  @ResponseStatus(HttpStatus.CONFLICT)
+  public ProblemDetail handleUserAlreadyInDeckException(UserAlreadyInDeckException e) {
+    logger.error(e.getMessage());
+
+    ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
+    pd.setTitle("User already in deck");
+
+    return pd;
+  }
 }

@@ -5,6 +5,8 @@ import com.smartmemorize.backend.deck.deckinvitation.DeckInvitationRepository;
 import com.smartmemorize.backend.deck.dto.CreateDeckDTO;
 import com.smartmemorize.backend.deck.dto.DeckResponseDTO;
 import com.smartmemorize.backend.deck.exception.DeckNotFoundException;
+import com.smartmemorize.backend.deck.exception.UserAlreadyInDeckException;
+import com.smartmemorize.backend.deck.userdeck.UserDeckRepository;
 import com.smartmemorize.backend.user.User;
 import com.smartmemorize.backend.user.UserRepository;
 import com.smartmemorize.backend.user.exception.UserNotFoundException;
@@ -18,15 +20,18 @@ public class DeckServiceImpl implements DeckService {
   private final DeckInvitationRepository deckInvitationRepository;
   private final DeckRepository deckRepository;
   private final UserRepository userRepository;
+  private final UserDeckRepository userDeckRepository;
   private final ModelMapper modelMapper;
 
   public DeckServiceImpl(DeckInvitationRepository deckInvitationRepository,
       DeckRepository deckRepository,
       UserRepository userRepository,
+      UserDeckRepository userDeckRepository,
       ModelMapper modelMapper) {
     this.deckInvitationRepository = deckInvitationRepository;
     this.deckRepository = deckRepository;
     this.userRepository = userRepository;
+    this.userDeckRepository = userDeckRepository;
     this.modelMapper = modelMapper;
   }
 
@@ -54,6 +59,10 @@ public class DeckServiceImpl implements DeckService {
 
     User recipient = userRepository.findById(userId)
         .orElseThrow(() -> new UserNotFoundException(userId));
+
+    if (userDeckRepository.existsByUserAndDeck(recipient, deck)) {
+      throw new UserAlreadyInDeckException();
+    }
 
     DeckInvitation invitation = new DeckInvitation();
     invitation.setDeck(deck);

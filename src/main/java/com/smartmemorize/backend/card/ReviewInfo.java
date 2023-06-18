@@ -1,6 +1,6 @@
 package com.smartmemorize.backend.card;
 
-import com.smartmemorize.backend.deck.UserDeck;
+import com.smartmemorize.backend.deck.userdeck.UserDeck;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
