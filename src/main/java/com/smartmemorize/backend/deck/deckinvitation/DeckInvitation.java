@@ -1,5 +1,6 @@
-package com.smartmemorize.backend.deck;
+package com.smartmemorize.backend.deck.deckinvitation;
 
+import com.smartmemorize.backend.deck.Deck;
 import com.smartmemorize.backend.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

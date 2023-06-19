@@ -1,4 +1,4 @@
-package com.smartmemorize.backend.deck;
+package com.smartmemorize.backend.deck.deckinvitation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,7 +1,7 @@
 package com.smartmemorize.backend.user;
 
 import com.smartmemorize.backend.deck.Deck;
-import com.smartmemorize.backend.deck.DeckInvitation;
+import com.smartmemorize.backend.deck.deckinvitation.DeckInvitation;
 import com.smartmemorize.backend.deck.UserDeck;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

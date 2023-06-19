@@ -1,6 +1,5 @@
 package com.smartmemorize.backend.user;
 
-import com.smartmemorize.backend.security.UserPrincipal;
 import com.smartmemorize.backend.user.dto.CreateUserDTO;
 import com.smartmemorize.backend.user.dto.UserResponseDTO;
 import com.smartmemorize.backend.user.exception.UserExistsException;
@@ -15,7 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {

@@ -1,5 +1,7 @@
 package com.smartmemorize.backend.deck;
 
+import com.smartmemorize.backend.deck.deckinvitation.DeckInvitation;
+import com.smartmemorize.backend.deck.deckinvitation.DeckInvitationRepository;
 import com.smartmemorize.backend.deck.dto.CreateDeckDTO;
 import com.smartmemorize.backend.deck.dto.DeckResponseDTO;
 import com.smartmemorize.backend.deck.exception.DeckNotFoundException;

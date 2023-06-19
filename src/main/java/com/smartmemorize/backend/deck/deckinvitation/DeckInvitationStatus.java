@@ -1,4 +1,4 @@
-package com.smartmemorize.backend.deck;
+package com.smartmemorize.backend.deck.deckinvitation;
 
 public enum DeckInvitationStatus {
   PENDING,
